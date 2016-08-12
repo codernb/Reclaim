@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Models;
+using Assets.Scripts.Models.Map;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
 

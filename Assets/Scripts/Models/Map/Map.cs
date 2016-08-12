@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Assets.Scripts.Models
+namespace Assets.Scripts.Models.Map
 {
     [Serializable]
     public class Map

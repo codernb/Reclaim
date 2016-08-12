@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Assets.Scripts.Models.Buildings;
+using Assets.Scripts.Models.Humans;
+using Assets.Scripts.Models.Items;
+using Assets.Scripts.Models.Zombies;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 
-namespace Assets.Scripts.Models
+namespace Assets.Scripts.Models.Map
 {
     [Serializable]
     class Tile
