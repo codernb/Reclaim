@@ -1,8 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Assets.Scripts.Models.Map;
+using UnityEngine;
 
 public class TileController : MonoBehaviour
 {
+
+    public Tile tile;
 
     private Color originalColor;
     private bool isSelected;

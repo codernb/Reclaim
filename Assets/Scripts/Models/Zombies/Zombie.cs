@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Models.Zombies
 {
-    interface Zombie
+    public interface Zombie
     {
 
         StatsContainer getStats();

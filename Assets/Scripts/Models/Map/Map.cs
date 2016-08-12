@@ -7,7 +7,7 @@ namespace Assets.Scripts.Models.Map
     public class Map
     {
 
-        private Tile[,] map;
+        public Tile[,] map;
 
         public Map(int size)
         {

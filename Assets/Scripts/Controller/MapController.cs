@@ -27,23 +27,19 @@ public class MapController : MonoBehaviour
             Debug.Log("TODO: save map");
         map = new Map(size);
         if (mapView == null)
-            mapView = new MapView(size, prefabStore);
+            mapView = new MapView(map.map, prefabStore);
         else
-            mapView.clear();
+            mapView.clear(map.map);
     }
 
     private void select()
     {
+        Debug.Log(Input.mousePosition);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 100))
         {
-            if (!Input.GetKey(KeyCode.LeftControl))
-            {
-                clear();
-                selectedTileControllers.Clear();
-            }
             var selectedTileController = hit.collider.gameObject.GetComponent<TileController>();
             if (selectedTileController == null)
             {
@@ -51,6 +47,8 @@ public class MapController : MonoBehaviour
             }
             else
             {
+                if (!Input.GetKey(KeyCode.LeftControl))
+                    clear();
                 selectedTileController.selected(true);
                 selectedTileControllers.Add(selectedTileController);
             }
@@ -65,6 +63,7 @@ public class MapController : MonoBehaviour
     {
         foreach (var tileController in selectedTileControllers)
             tileController.selected(false);
+        selectedTileControllers.Clear();
     }
 
     private class MapView
@@ -72,24 +71,25 @@ public class MapController : MonoBehaviour
         private TileController[,] map;
         private PrefabStore prefabStore;
 
-        public MapView(int size, PrefabStore prefabStore)
+        public MapView(Tile[,] tiles, PrefabStore prefabStore)
         {
             this.prefabStore = prefabStore;
-            initialize(size);
+            initialize(tiles);
         }
 
-        public void clear()
+        public void clear(Tile[,] tiles)
         {
-            initialize(map.GetLength(0), true);
+            initialize(tiles, true);
         }
 
-        private void initialize(int size)
+        private void initialize(Tile[,] tiles)
         {
-            initialize(size, false);
+            initialize(tiles, false);
         }
 
-        private void initialize(int size, bool clear)
+        private void initialize(Tile[,] tiles, bool clear)
         {
+            var size = tiles.GetLength(0);
             var position = new Vector3();
             if (!clear)
                 map = new TileController[size, size];
@@ -99,7 +99,8 @@ public class MapController : MonoBehaviour
                 {
                     if (clear)
                         map[i, j].clear();
-                    map[i, j] = ((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity)).GetComponent<TileController>();
+                    var tileController = ((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity)).GetComponent<TileController>();
+                    map[i, j] = tileController;
                     position.z = j;
                 }
                 position.x = i;

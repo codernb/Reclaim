@@ -9,13 +9,14 @@ using System.Collections.Generic;
 namespace Assets.Scripts.Models.Map
 {
     [Serializable]
-    class Tile
+    public class Tile
     {
 
-        private List<Human> humans;
-        private List<Zombie> zombies;
-        private List<Item> items;
-        private Building building;
+        public String name;
+        public List<Human> humans;
+        public List<Zombie> zombies;
+        public List<Item> items;
+        public Building building;
 
     }
 }

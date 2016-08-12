@@ -1,7 +1,7 @@
 ﻿
 namespace Assets.Scripts.Models.Buildings
 {
-    interface Building
+    public interface Building
     {
     }
 }
