@@ -7,6 +7,7 @@ public class MapController : MonoBehaviour
 {
 
     public PrefabStore prefabStore;
+    public SelectionController selectionController;
 
     private Map map;
     private MapView mapView;
@@ -14,6 +15,8 @@ public class MapController : MonoBehaviour
 
     void Update()
     {
+        if (Input.mousePosition.x < 200)
+            return;
         if (Input.GetKey(KeyCode.Mouse0))
             select();
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -34,13 +37,14 @@ public class MapController : MonoBehaviour
 
     private void select()
     {
-        Debug.Log(Input.mousePosition);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 100))
         {
             var selectedTileController = hit.collider.gameObject.GetComponent<TileController>();
+            if (selectedTileControllers.Contains(selectedTileController))
+                return;
             if (selectedTileController == null)
             {
                 clear();
@@ -51,6 +55,7 @@ public class MapController : MonoBehaviour
                     clear();
                 selectedTileController.selected(true);
                 selectedTileControllers.Add(selectedTileController);
+                selectionController.update(selectedTileControllers);
             }
         }
         else
@@ -64,6 +69,7 @@ public class MapController : MonoBehaviour
         foreach (var tileController in selectedTileControllers)
             tileController.selected(false);
         selectedTileControllers.Clear();
+        selectionController.clear();
     }
 
     private class MapView
@@ -100,6 +106,7 @@ public class MapController : MonoBehaviour
                     if (clear)
                         map[i, j].clear();
                     var tileController = ((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity)).GetComponent<TileController>();
+                    tileController.setName(i + " " + j);
                     map[i, j] = tileController;
                     position.z = j;
                 }

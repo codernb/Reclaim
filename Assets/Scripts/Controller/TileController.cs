@@ -31,4 +31,14 @@ public class TileController : MonoBehaviour
         }
     }
 
+    public string getName()
+    {
+        return tile.name;
+    }
+
+    public void setName(string name)
+    {
+        tile.name = name;
+    }
+
 }

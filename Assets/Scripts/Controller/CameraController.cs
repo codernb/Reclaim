@@ -45,13 +45,15 @@ public class CameraController : MonoBehaviour
             right();
         else
             zeroHorizontal();
+        transform.Translate(translation);
+        if (Input.mousePosition.x < 200)
+            return;
         if (Input.GetMouseButtonDown(1))
             resetMousePosition();
         if (Input.GetKey(KeyCode.Mouse1))
             rotate();
         if (Input.mouseScrollDelta.magnitude > 0)
             zoom();
-        transform.Translate(translation);
     }
 
     private void up()
