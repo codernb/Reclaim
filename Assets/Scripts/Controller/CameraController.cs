@@ -15,6 +15,12 @@ public class CameraController : MonoBehaviour
     private Vector3 mousePosition;
     private Vector3 rotation = new Vector3();
     private Vector3 containerRotation = new Vector3();
+    private static bool movingEnabled = true;
+
+    public static void enableMovement(bool enable)
+    {
+        movingEnabled = enable;
+    }
 
     public void invertX()
     {
@@ -33,6 +39,14 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        keyboard();
+        mouse();
+    }
+
+    private void keyboard()
+    {
+        if (!movingEnabled)
+            return;
         if (Input.GetKey(KeyCode.W))
             up();
         else if (Input.GetKey(KeyCode.S))
@@ -46,6 +60,10 @@ public class CameraController : MonoBehaviour
         else
             zeroHorizontal();
         transform.Translate(translation);
+    }
+
+    private void mouse()
+    {
         if (Input.mousePosition.x < 200)
             return;
         if (Input.GetMouseButtonDown(1))

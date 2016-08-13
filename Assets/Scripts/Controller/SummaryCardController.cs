@@ -11,4 +11,14 @@ public class SummaryCardController : MonoBehaviour {
         nameLabel.text = tile.getName();
     }
 
+    public void setName(string name)
+    {
+        tile.setName(name);
+    }
+
+    public void enableMovement(bool enable)
+    {
+        CameraController.enableMovement(enable);
+    }
+
 }
