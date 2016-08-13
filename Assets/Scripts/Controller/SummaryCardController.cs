@@ -3,17 +3,20 @@ using UnityEngine.UI;
 
 public class SummaryCardController : MonoBehaviour {
 
-    public Text nameLabel;
-    public TileController tile;
-
-    void Update()
-    {
-        nameLabel.text = tile.getName();
-    }
+    public InputField nameLabel;
+    private TileController tileController;
 
     public void setName(string name)
     {
-        tile.setName(name);
+        tileController.setName(name);
+        nameLabel.text = name;
+        CameraController.enableMovement(true);
+    }
+
+    public void setTileController(TileController tileController)
+    {
+        this.tileController = tileController;
+        setName(tileController.tile.name);
     }
 
     public void enableMovement(bool enable)

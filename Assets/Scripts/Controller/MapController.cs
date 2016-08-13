@@ -43,8 +43,6 @@ public class MapController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100))
         {
             var selectedTileController = hit.collider.gameObject.GetComponent<TileController>();
-            if (selectedTileControllers.Contains(selectedTileController))
-                return;
             if (selectedTileController == null)
             {
                 clear();
@@ -53,6 +51,8 @@ public class MapController : MonoBehaviour
             {
                 if (!Input.GetKey(KeyCode.LeftControl))
                     clear();
+                else if (selectedTileControllers.Contains(selectedTileController))
+                    return;
                 selectedTileController.selected(true);
                 selectedTileControllers.Add(selectedTileController);
                 selectionController.update(selectedTileControllers);

@@ -12,7 +12,7 @@ namespace Assets.Scripts.Models.Map
     public class Tile
     {
 
-        public String name;
+        public string name;
         public List<Human> humans;
         public List<Zombie> zombies;
         public List<Item> items;

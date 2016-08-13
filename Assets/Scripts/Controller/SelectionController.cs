@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SelectionController : MonoBehaviour
 {
@@ -12,8 +11,8 @@ public class SelectionController : MonoBehaviour
 
     public void update(HashSet<TileController> selection)
     {
-        resize(selection.Count);
         clear();
+        resize(selection.Count);
         instantiate(selection);
     }
 
@@ -30,6 +29,7 @@ public class SelectionController : MonoBehaviour
         foreach (var card in cards)
             Destroy(card);
         cards.Clear();
+        resize(0);
     }
 
     private void instantiate(HashSet<TileController> selection)
@@ -37,7 +37,7 @@ public class SelectionController : MonoBehaviour
         foreach (var tileController in selection)
         {
             var card = (GameObject)Instantiate(prefabStore.SummaryCard, transform);
-            card.GetComponent<SummaryCardController>().tile = tileController;
+            card.GetComponent<SummaryCardController>().setTileController(tileController);
             cards.Add(card);
         }
     }

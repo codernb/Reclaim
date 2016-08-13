@@ -125,7 +125,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 20
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a18c50f88e25d42a334aba14fb2b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameLabel: {fileID: 114000014064978356}
+  nameLabel: {fileID: 114000010674323682}
   tile: {fileID: 0}
 --- !u!114 &114000012862541392
 MonoBehaviour:
@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: test
 --- !u!114 &114000014113927642
 MonoBehaviour:
   m_ObjectHideFlags: 1
