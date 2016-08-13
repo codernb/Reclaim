@@ -2,6 +2,7 @@
 using Assets.Scripts.Models.Map;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MapController : MonoBehaviour
 {
@@ -114,6 +115,23 @@ public class MapController : MonoBehaviour
             }
         }
 
+    }
+
+    public void setName(InputField nameField)
+    {
+        map.name = nameField.text;
+    }
+
+    public string getName()
+    {
+        return map.name;
+    }
+
+    public void save()
+    {
+        if (map.name == null || map.name.Length == 0)
+            return;
+        MapWriter.save(map);
     }
 
 }
