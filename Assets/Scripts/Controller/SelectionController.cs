@@ -16,20 +16,20 @@ public class SelectionController : MonoBehaviour
         instantiate(selection);
     }
 
-    private void resize(int count)
-    {
-        var rectTransform = GetComponent<RectTransform>();
-        var size = rectTransform.sizeDelta;
-        size.y = count * prefabStore.SummaryCard.GetComponent<RectTransform>().sizeDelta.y;
-        rectTransform.sizeDelta = size;
-    }
-
     public void clear()
     {
         foreach (var card in cards)
             Destroy(card);
         cards.Clear();
         resize(0);
+    }
+
+    private void resize(int count)
+    {
+        var rectTransform = GetComponent<RectTransform>();
+        var size = rectTransform.sizeDelta;
+        size.y = count * prefabStore.SummaryCard.GetComponent<RectTransform>().sizeDelta.y;
+        rectTransform.sizeDelta = size;
     }
 
     private void instantiate(HashSet<TileController> selection)

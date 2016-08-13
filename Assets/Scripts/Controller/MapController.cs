@@ -26,14 +26,24 @@ public class MapController : MonoBehaviour
 
     public void newMap(int size)
     {
-        selectedTileControllers = new HashSet<TileController>();
         if (map != null)
             Debug.Log("TODO: save map");
-        map = new Map(size);
+        setMap(new Map(size));
+    }
+
+    public void setMap(Map newMap)
+    {
+        selectedTileControllers = new HashSet<TileController>();
+        map = newMap;
         if (mapView == null)
             mapView = new MapView(map.map, prefabStore);
         else
             mapView.clear(map.map);
+    }
+
+    public bool isMapSet()
+    {
+        return map != null;
     }
 
     private void select()
@@ -71,6 +81,33 @@ public class MapController : MonoBehaviour
             tileController.selected(false);
         selectedTileControllers.Clear();
         selectionController.clear();
+    }
+
+    public void setName(InputField nameField)
+    {
+        map.name = nameField.text;
+    }
+
+    public string getName()
+    {
+        return map.name;
+    }
+
+    public string[] getMapNames()
+    {
+        return MapReader.getMapNames();
+    }
+
+    public void load(Text nameField)
+    {
+        setMap(MapReader.load(nameField.text));
+    }
+
+    public void save()
+    {
+        if (map.name == null || map.name.Length == 0)
+            return;
+        MapWriter.save(map);
     }
 
     private class MapView
@@ -115,23 +152,6 @@ public class MapController : MonoBehaviour
             }
         }
 
-    }
-
-    public void setName(InputField nameField)
-    {
-        map.name = nameField.text;
-    }
-
-    public string getName()
-    {
-        return map.name;
-    }
-
-    public void save()
-    {
-        if (map.name == null || map.name.Length == 0)
-            return;
-        MapWriter.save(map);
     }
 
 }
