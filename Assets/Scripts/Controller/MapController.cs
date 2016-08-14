@@ -34,7 +34,6 @@ public class MapController : MonoBehaviour
 
     public void setMap(Map newMap)
     {
-        Debug.Log("setMap: " + newMap.tiles[0, 0].name);
         saveButtonController.setMapName(newMap.name);
         instantiateMap(newMap);
         map = newMap;
@@ -65,7 +64,9 @@ public class MapController : MonoBehaviour
             for (int j = 0; j < size; j++)
             {
                 position.z = j;
-                tileControllers.Add(((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity, transform)).GetComponent<TileController>());
+                var tileController = ((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity, transform)).GetComponent<TileController>();
+                tileController.setTile(map.tiles[i, j]);
+                tileControllers.Add(tileController);
             }
         }
     }
@@ -114,7 +115,7 @@ public class MapController : MonoBehaviour
 
     public void setName(InputField nameField)
     {
-        if (nameField.text.Trim().Length == 0)
+        if (map == null || nameField.text.Trim().Length == 0)
             return;
         map.name = nameField.text;
     }
@@ -138,7 +139,6 @@ public class MapController : MonoBehaviour
     {
         if (map.name == null || map.name.Length == 0)
             return;
-        Debug.Log("save: " + map.tiles[0, 0].name);
         MapWriter.save(map);
     }
 

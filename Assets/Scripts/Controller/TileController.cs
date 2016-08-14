@@ -4,8 +4,7 @@ using UnityEngine;
 public class TileController : MonoBehaviour
 {
 
-    public Tile tile;
-
+    private Tile tile;
     private Color originalColor;
     private bool isSelected;
 
@@ -29,6 +28,16 @@ public class TileController : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().material.color = originalColor;
             isSelected = false;
         }
+    }
+
+    public void setTile(Tile tile)
+    {
+        this.tile = tile;
+    }
+
+    public Tile getTile()
+    {
+        return tile;
     }
 
     public string getName()

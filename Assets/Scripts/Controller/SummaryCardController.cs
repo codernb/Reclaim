@@ -16,7 +16,7 @@ public class SummaryCardController : MonoBehaviour {
     public void setTileController(TileController tileController)
     {
         this.tileController = tileController;
-        setName(tileController.tile.name);
+        setName(tileController.getTile().name);
     }
 
     public void enableMovement(bool enable)
