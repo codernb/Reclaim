@@ -9,8 +9,12 @@ public class SaveButtonController : MonoBehaviour {
 
 	void Update() {
         inputField.interactable = mapController.isMapSet();
-        var text = inputField.text;
-        button.interactable = text != null && text.Trim().Length > 0;
+        button.interactable = inputField.text.Trim().Length > 0;
+    }
+
+    public void setMapName(string name)
+    {
+        inputField.text = name;
     }
 	
 }

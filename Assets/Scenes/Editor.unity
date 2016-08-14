@@ -2979,6 +2979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabStore: {fileID: 1304121107}
   selectionController: {fileID: 1211694773}
+  saveButtonController: {fileID: 1181377136}
 --- !u!1 &1436616020
 GameObject:
   m_ObjectHideFlags: 0

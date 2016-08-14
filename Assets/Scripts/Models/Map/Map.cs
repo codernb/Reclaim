@@ -8,11 +8,14 @@ namespace Assets.Scripts.Models.Map
     {
 
         public string name;
-        public Tile[,] map;
+        public Tile[,] tiles;
 
         public Map(int size)
         {
-            map = new Tile[size, size];
+            tiles = new Tile[size, size];
+            for (int i = 0; i < size; i++)
+                for (int j = 0; j < size; j++)
+                    tiles[i, j] = new Tile();
         }
 
     }

@@ -9,9 +9,10 @@ public class MapController : MonoBehaviour
 
     public PrefabStore prefabStore;
     public SelectionController selectionController;
+    public SaveButtonController saveButtonController;
 
     private Map map;
-    private MapView mapView;
+    private HashSet<TileController> tileControllers = new HashSet<TileController>();
     private HashSet<TileController> selectedTileControllers = new HashSet<TileController>();
 
     void Update()
@@ -21,24 +22,52 @@ public class MapController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
             select();
         if (Input.GetKeyDown(KeyCode.Escape))
-            clear();
+            clearSelection();
     }
 
     public void newMap(int size)
     {
         if (map != null)
-            Debug.Log("TODO: save map");
+            Debug.Log("TODO: ask to save map");
         setMap(new Map(size));
     }
 
     public void setMap(Map newMap)
     {
-        selectedTileControllers = new HashSet<TileController>();
+        Debug.Log("setMap: " + newMap.tiles[0, 0].name);
+        saveButtonController.setMapName(newMap.name);
+        instantiateMap(newMap);
         map = newMap;
-        if (mapView == null)
-            mapView = new MapView(map.map, prefabStore);
-        else
-            mapView.clear(map.map);
+    }
+
+    private void instantiateMap(Map map)
+    {
+        clear();
+        instantiateTiles(map);
+    }
+
+    private void clear()
+    {
+        foreach (var tileController in tileControllers)
+            Destroy(tileController.gameObject);
+        tileControllers.Clear();
+        selectedTileControllers.Clear();
+        selectionController.update(selectedTileControllers);
+    }
+
+    private void instantiateTiles(Map map)
+    {
+        var size = map.tiles.GetLength(0);
+        var position = new Vector3();
+        for (int i = 0; i < size; i++)
+        {
+            position.x = i;
+            for (int j = 0; j < size; j++)
+            {
+                position.z = j;
+                tileControllers.Add(((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity, transform)).GetComponent<TileController>());
+            }
+        }
     }
 
     public bool isMapSet()
@@ -56,12 +85,12 @@ public class MapController : MonoBehaviour
             var selectedTileController = hit.collider.gameObject.GetComponent<TileController>();
             if (selectedTileController == null)
             {
-                clear();
+                clearSelection();
             }
             else
             {
                 if (!Input.GetKey(KeyCode.LeftControl))
-                    clear();
+                    clearSelection();
                 else if (selectedTileControllers.Contains(selectedTileController))
                     return;
                 selectedTileController.selected(true);
@@ -71,11 +100,11 @@ public class MapController : MonoBehaviour
         }
         else
         {
-            clear();
+            clearSelection();
         }
     }
 
-    private void clear()
+    private void clearSelection()
     {
         foreach (var tileController in selectedTileControllers)
             tileController.selected(false);
@@ -85,6 +114,8 @@ public class MapController : MonoBehaviour
 
     public void setName(InputField nameField)
     {
+        if (nameField.text.Trim().Length == 0)
+            return;
         map.name = nameField.text;
     }
 
@@ -107,51 +138,8 @@ public class MapController : MonoBehaviour
     {
         if (map.name == null || map.name.Length == 0)
             return;
+        Debug.Log("save: " + map.tiles[0, 0].name);
         MapWriter.save(map);
-    }
-
-    private class MapView
-    {
-        private TileController[,] map;
-        private PrefabStore prefabStore;
-
-        public MapView(Tile[,] tiles, PrefabStore prefabStore)
-        {
-            this.prefabStore = prefabStore;
-            initialize(tiles);
-        }
-
-        public void clear(Tile[,] tiles)
-        {
-            initialize(tiles, true);
-        }
-
-        private void initialize(Tile[,] tiles)
-        {
-            initialize(tiles, false);
-        }
-
-        private void initialize(Tile[,] tiles, bool clear)
-        {
-            var size = tiles.GetLength(0);
-            var position = new Vector3();
-            if (!clear)
-                map = new TileController[size, size];
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    if (clear)
-                        map[i, j].clear();
-                    var tileController = ((GameObject)Instantiate(prefabStore.Tile, position, Quaternion.identity)).GetComponent<TileController>();
-                    tileController.setName(i + " " + j);
-                    map[i, j] = tileController;
-                    position.z = j;
-                }
-                position.x = i;
-            }
-        }
-
     }
 
 }

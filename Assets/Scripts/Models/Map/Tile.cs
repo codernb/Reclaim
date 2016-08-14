@@ -12,10 +12,10 @@ namespace Assets.Scripts.Models.Map
     public class Tile
     {
 
-        public string name;
-        public List<Human> humans;
-        public List<Zombie> zombies;
-        public List<Item> items;
+        public string name = "Empty Tile";
+        public List<Human> humans = new List<Human>();
+        public List<Zombie> zombies = new List<Zombie>();
+        public List<Item> items = new List<Item>();
         public Building building;
 
     }
