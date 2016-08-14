@@ -11,8 +11,6 @@ public class BuildingMenuController : MonoBehaviour {
 
     public static void showBuilding(Building building)
     {
-        if (building == null)
-            return;
         staticGameObject.GetComponent<Canvas>().enabled = true;
         staticBuilding = building;
     }
@@ -29,6 +27,8 @@ public class BuildingMenuController : MonoBehaviour {
 
     public void setName(InputField name)
     {
+        if (staticBuilding == null)
+            return;
         staticBuilding.setName(name.text);
     }
 
