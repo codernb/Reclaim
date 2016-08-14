@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
 
     private void mouse()
     {
-        if (Input.mousePosition.x < 200)
+        if (Input.mousePosition.x < 300)
             return;
         if (Input.GetMouseButtonDown(1))
             resetMousePosition();

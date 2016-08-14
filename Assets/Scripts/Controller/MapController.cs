@@ -97,7 +97,7 @@ public class MapController : MonoBehaviour
 
     void Update()
     {
-        if (Input.mousePosition.x < 200)
+        if (Input.mousePosition.x < 300)
             return;
         if (Input.GetKey(KeyCode.Mouse0))
             selectTile();
