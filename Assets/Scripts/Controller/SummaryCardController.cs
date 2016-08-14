@@ -24,4 +24,9 @@ public class SummaryCardController : MonoBehaviour {
         CameraController.enableMovement(enable);
     }
 
+    public void openBuildingMenu()
+    {
+        BuildingMenuController.showBuilding(tileController.getTile().building);
+    }
+
 }
