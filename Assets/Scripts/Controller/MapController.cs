@@ -15,14 +15,38 @@ public class MapController : MonoBehaviour
     private HashSet<TileController> tileControllers = new HashSet<TileController>();
     private HashSet<TileController> selectedTileControllers = new HashSet<TileController>();
 
-    void Update()
+    public string getName()
     {
-        if (Input.mousePosition.x < 200)
+        return map.name;
+    }
+
+    public void setName(InputField nameField)
+    {
+        if (map == null || nameField.text.Trim().Length == 0)
             return;
-        if (Input.GetKey(KeyCode.Mouse0))
-            select();
-        if (Input.GetKeyDown(KeyCode.Escape))
-            clearSelection();
+        map.name = nameField.text;
+    }
+
+    public string[] getMapNames()
+    {
+        return MapReader.getMapNames();
+    }
+
+    public void loadMap(Text nameField)
+    {
+        setMap(MapReader.load(nameField.text));
+    }
+
+    public void saveMap()
+    {
+        if (!isMapSet() || map.name.Trim().Length == 0)
+            return;
+        MapWriter.save(map);
+    }
+
+    public bool isMapSet()
+    {
+        return map != null;
     }
 
     public void newMap(int size)
@@ -41,11 +65,11 @@ public class MapController : MonoBehaviour
 
     private void instantiateMap(Map map)
     {
-        clear();
+        clearMap();
         instantiateTiles(map);
     }
 
-    private void clear()
+    private void clearMap()
     {
         foreach (var tileController in tileControllers)
             Destroy(tileController.gameObject);
@@ -71,12 +95,17 @@ public class MapController : MonoBehaviour
         }
     }
 
-    public bool isMapSet()
+    void Update()
     {
-        return map != null;
+        if (Input.mousePosition.x < 200)
+            return;
+        if (Input.GetKey(KeyCode.Mouse0))
+            selectTile();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            clearSelection();
     }
 
-    private void select()
+    private void selectTile()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -111,35 +140,6 @@ public class MapController : MonoBehaviour
             tileController.selected(false);
         selectedTileControllers.Clear();
         selectionController.clear();
-    }
-
-    public void setName(InputField nameField)
-    {
-        if (map == null || nameField.text.Trim().Length == 0)
-            return;
-        map.name = nameField.text;
-    }
-
-    public string getName()
-    {
-        return map.name;
-    }
-
-    public string[] getMapNames()
-    {
-        return MapReader.getMapNames();
-    }
-
-    public void load(Text nameField)
-    {
-        setMap(MapReader.load(nameField.text));
-    }
-
-    public void save()
-    {
-        if (map.name == null || map.name.Length == 0)
-            return;
-        MapWriter.save(map);
     }
 
 }

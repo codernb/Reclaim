@@ -988,7 +988,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1426238104}
-        m_MethodName: load
+        m_MethodName: loadMap
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1895234992}
