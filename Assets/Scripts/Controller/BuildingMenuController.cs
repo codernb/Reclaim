@@ -1,42 +1,30 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Models.Buildings;
 using UnityEngine.UI;
 using Assets.Scripts.Models.Map;
 
 public class BuildingMenuController : MonoBehaviour {
 
-    public new InputField name;
+    public InputField nameField;
 
-    private static GameObject staticGameObject;
-    private static Tile staticTile;
+    private Tile tile;
 
-    public static void showBuilding(Tile tile)
+    public void showBuilding(Tile tile)
     {
-        staticGameObject.GetComponent<Canvas>().enabled = true;
-        staticTile = tile;
-        staticGameObject.GetComponent<BuildingMenuController>().update();
-    }
-
-    void Start()
-    {
-        staticGameObject = gameObject;
-    }
-
-    private void update()
-    {
-        name.text = staticTile.building.getName();
+        this.tile = tile;
+        gameObject.GetComponent<Canvas>().enabled = true;
+        nameField.text = tile.building.getName();
     }
 
     public void setName(InputField name)
     {
-        if (staticTile.building == null)
+        if (tile.building == null)
             return;
-        staticTile.building.setName(name.text);
+        tile.building.setName(name.text);
     }
 
     public void delete()
     {
-        staticTile.building = null;
+        tile.building = null;
     }
 
 } 

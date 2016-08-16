@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Models.Buildings;
+using Assets.Scripts.Models.Map;
+using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +8,8 @@ public class SummaryCardController : MonoBehaviour {
 
     public InputField nameLabel;
     public GameObject newBuildingButton;
+    public Text humansButtonText;
+    public Text zombiesButtonText;
 
     private TileController tileController;
 
@@ -13,7 +17,7 @@ public class SummaryCardController : MonoBehaviour {
     {
         tileController.setName(name);
         nameLabel.text = name;
-        CameraController.enableMovement(true);
+        MenuController.enableCameraMovementS(true);
     }
 
     public void setTileController(TileController tileController)
@@ -21,16 +25,9 @@ public class SummaryCardController : MonoBehaviour {
         this.tileController = tileController;
         setName(tileController.getTile().name);
         newBuildingButton.SetActive(!isBuildingSet());
-    }
-
-    public void enableMovement(bool enable)
-    {
-        CameraController.enableMovement(enable);
-    }
-
-    public void openBuildingMenu()
-    {
-        BuildingMenuController.showBuilding(tileController.getTile());
+        var tile = tileController.getTile();
+        humansButtonText.text = tile.humans.Count.ToString() + " Humans";
+        zombiesButtonText.text = tileController.getTile().zombies.Count.ToString() + " Zombies";
     }
 
     public bool isBuildingSet()
@@ -46,6 +43,26 @@ public class SummaryCardController : MonoBehaviour {
     public void setBuilding(Building building)
     {
         tileController.getTile().building = building;
+    }
+
+    public void enableCameraMovement(bool enable)
+    {
+        MenuController.enableCameraMovementS(enable);
+    }
+
+    public void openBuildingMenu()
+    {
+        MenuController.openBuildingMenuS(tileController.getTile());
+    }
+
+    public void openHumansMenu()
+    {
+        MenuController.openHumansMenuS(tileController.getTile());
+    }
+
+    public void openZombiesMenu()
+    {
+        MenuController.openZombiesMenuS(tileController.getTile());
     }
 
 }

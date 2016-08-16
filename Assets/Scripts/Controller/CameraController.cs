@@ -15,12 +15,7 @@ public class CameraController : MonoBehaviour
     private Vector3 mousePosition;
     private Vector3 rotation = new Vector3();
     private Vector3 containerRotation = new Vector3();
-    private static bool movingEnabled = true;
-
-    public static void enableMovement(bool enable)
-    {
-        movingEnabled = enable;
-    }
+    public bool movingEnabled = true;
 
     public void invertX()
     {
