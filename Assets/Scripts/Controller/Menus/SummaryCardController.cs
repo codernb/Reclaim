@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Models.Buildings;
-using Assets.Scripts.Models.Map;
 using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +16,7 @@ public class SummaryCardController : MonoBehaviour {
     {
         tileController.setName(name);
         nameLabel.text = name;
-        MenuController.enableCameraMovementS(true);
+        endEditText();
     }
 
     public void setTileController(TileController tileController)
@@ -63,6 +62,16 @@ public class SummaryCardController : MonoBehaviour {
     public void openZombiesMenu()
     {
         MenuController.openZombiesMenuS(tileController.getTile());
+    }
+
+    public void startEditText()
+    {
+        MenuController.startEditTextS();
+    }
+
+    public void endEditText()
+    {
+        MenuController.endEditTextS();
     }
 
 }

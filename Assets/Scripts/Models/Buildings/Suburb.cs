@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.Scripts.Models.Buildings
 {
@@ -10,6 +7,7 @@ namespace Assets.Scripts.Models.Buildings
     {
 
         private string name;
+        private float integrity = 1;
 
         public string getName()
         {
@@ -19,6 +17,16 @@ namespace Assets.Scripts.Models.Buildings
         public void setName(string name)
         {
             this.name = name;
+        }
+
+        public float getIntegrity()
+        {
+            return integrity;
+        }
+
+        public void setIntegrity(float integrity)
+        {
+            this.integrity = integrity;
         }
     }
 }

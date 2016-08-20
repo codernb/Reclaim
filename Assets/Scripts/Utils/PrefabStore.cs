@@ -7,6 +7,7 @@ namespace Assets.Scripts.Utils
 
         public GameObject Tile;
         public GameObject SummaryCard;
+        public GameObject HumanNameCard;
 
     }
 }

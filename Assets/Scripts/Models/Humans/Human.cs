@@ -10,6 +10,9 @@ namespace Assets.Scripts.Models.Humans
     public interface Human
     {
 
+        void setName(string name);
+        string getName();
+
         StatsContainer getStats();
         SkillsContainer getSkills();
 

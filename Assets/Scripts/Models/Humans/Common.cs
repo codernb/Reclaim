@@ -13,6 +13,7 @@ namespace Assets.Scripts.Models.Humans
     public class Common : Human
     {
 
+        private string name = "John Doe";
         private List<Item> items = new List<Item>();
         private Stats stats = new Stats();
         private Skills skills = new Skills();
@@ -63,6 +64,16 @@ namespace Assets.Scripts.Models.Humans
         public float getCapacity()
         {
             return stats.getStrength() * 10;
+        }
+
+        public void setName(string name)
+        {
+            this.name = name;
+        }
+
+        public string getName()
+        {
+            return name;
         }
 
         public class Stats : StatsContainer

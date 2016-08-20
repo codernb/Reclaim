@@ -107,6 +107,8 @@ public class MapController : MonoBehaviour
 
     private void selectTile()
     {
+        if (MenuController.isMenuOpenS())
+            return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
