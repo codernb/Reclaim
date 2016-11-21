@@ -10,11 +10,13 @@ public class BuildingMenuController : MonoBehaviour
     public Slider integritySlider;
 
     private Tile tile;
+    private SummaryCardController summaryCardController;
 
-    public void showBuilding(Tile tile)
+    public void showBuilding(Tile tile, SummaryCardController summaryCardController)
     {
         this.tile = tile;
-        gameObject.GetComponent<Canvas>().enabled = true;
+        this.summaryCardController = summaryCardController;
+        gameObject.SetActive(true);
         nameField.text = tile.building.getName();
         integritySlider.value = tile.building.getIntegrity();
     }
@@ -33,11 +35,12 @@ public class BuildingMenuController : MonoBehaviour
     public void delete()
     {
         tile.building = null;
+        //summaryCardController.
     }
 
     public void close()
     {
-        gameObject.GetComponent<Canvas>().enabled = false;
+        gameObject.SetActive(false);
     }
 
 }

@@ -18,7 +18,7 @@ public class HumanMenuController : MonoBehaviour
     public void showHumans(Tile tile)
     {
         this.tile = tile;
-        gameObject.GetComponent<Canvas>().enabled = true;
+        gameObject.SetActive(true);
         counter.text = tile.humans.Count.ToString();
         setHumans(tile.humans);
     }
@@ -35,11 +35,12 @@ public class HumanMenuController : MonoBehaviour
         var humanCard = (GameObject)Instantiate(prefabStore.HumanNameCard, content);
         humanCard.GetComponentInChildren<Text>().text = human.getName();
         cards[human] = humanCard;
+        humanCard.GetComponent<HumanNameCardController>().humanMenuController = this;
     }
 
     public void close()
     {
-        gameObject.GetComponent<Canvas>().enabled = false;
+        gameObject.SetActive(false);
     }
 
     public void addNewHuman()
@@ -55,6 +56,11 @@ public class HumanMenuController : MonoBehaviour
         Destroy(cards[human]);
         cards.Remove(human);
         resize();
+    }
+
+    public void show(Human human)
+    {
+
     }
 
     private void resize()

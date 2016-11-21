@@ -79,29 +79,49 @@ namespace Assets.Scripts.Models.Humans
         public class Stats : StatsContainer
         {
 
-            private int agility = 3;
-            private int intelligence = 3;
-            private int life = 5;
-            private int strength = 3;
+            private float agility = 3;
+            private float intelligence = 3;
+            private float life = 5;
+            private float strength = 3;
 
-            public int getAgility()
+            public float getAgility()
             {
                 return agility;
             }
 
-            public int getIntelligence()
+            public void setAgility(float agility)
+            {
+                this.agility = agility;
+            }
+
+            public float getIntelligence()
             {
                 return intelligence;
             }
 
-            public int getLife()
+            public void setIntelligence(float intelligence)
+            {
+                this.intelligence = intelligence;
+            }
+
+            public float getLife()
             {
                 return life;
             }
 
-            public int getStrength()
+            public void setLife(float life)
+            {
+                this.life = life;
+            }
+
+            public float getStrength()
             {
                 return strength;
+            }
+
+            public void setStrength(float strength)
+            {
+                this.strength = strength;
             }
         }
 

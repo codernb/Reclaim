@@ -69,7 +69,7 @@ namespace Assets.Scripts.Utils
         public void openBuildingMenu(Tile tile)
         {
             disableCameraMovement();
-            buildingMenuController.showBuilding(tile);
+            buildingMenuController.showBuilding(tile, null);
         }
 
         public void closeBuildingMenu()

@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000011862851404}
   - 114: {fileID: 114000014214874616}
   - 114: {fileID: 114000012855357700}
+  - 114: {fileID: 114000010799394338}
   m_Layer: 0
   m_Name: HumanNameCard 1
   m_TagString: Untagged
@@ -47,6 +48,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114000010799394338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010090878776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7953483d41863140bd0466227ec660d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanMenuController: {fileID: 0}
 --- !u!114 &114000011862851404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,7 +176,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114000011862851404}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000010799394338}
+        m_MethodName: show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &222000010865502830
@@ -192,10 +216,10 @@ RectTransform:
   - {fileID: 224000011767638662}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 532.17456, y: 411.13882}
+  m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011767638662
 RectTransform:

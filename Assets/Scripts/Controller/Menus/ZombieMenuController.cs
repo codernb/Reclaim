@@ -12,13 +12,13 @@ public class ZombieMenuController : MonoBehaviour
     public void showZombies(Tile tile)
     {
         this.tile = tile;
-        gameObject.GetComponent<Canvas>().enabled = true;
+        gameObject.SetActive(true);
         counter.text = tile.zombies.Count.ToString();
     }
 
     public void close()
     {
-        gameObject.GetComponent<Canvas>().enabled = false;
+        gameObject.SetActive(false);
     }
 
 }

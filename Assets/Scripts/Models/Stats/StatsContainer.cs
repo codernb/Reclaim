@@ -4,10 +4,17 @@ namespace Assets.Scripts.Models.Stats
     public interface StatsContainer
     {
 
-        int getLife();
-        int getStrength();
-        int getAgility();
-        int getIntelligence();
+        float getLife();
+        void setLife(float life);
+
+        float getStrength();
+        void setStrength(float strength);
+
+        float getAgility();
+        void setAgility(float agility);
+
+        float getIntelligence();
+        void setIntelligence(float intelligence);
 
     }
 }
